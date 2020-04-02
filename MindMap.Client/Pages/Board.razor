@@ -1,11 +1,11 @@
 ﻿@page "/board"
 
 <div class="sidebar">
-    <MatIcon Icon="text_fields" Class="icon" @onclick="@(() => AddRenderComponent(typeof(TextCard)))"></MatIcon>
-    <MatIcon Icon="link" Class="icon"></MatIcon>
-    <MatIcon Icon="check_box" Class="icon" @onclick="@(() => AddRenderComponent(typeof(TodoCard)))"></MatIcon>
-    <MatIcon Icon="code" Class="icon" @onclick="@(() => AddRenderComponent(typeof(VideoCard)))"></MatIcon>
-    <MatIcon Icon="dashboard" Class="icon" @onclick="@(() => AddRenderComponent(typeof(ImageCard)))"></MatIcon>
+    <MatIcon Icon="text_fields" Class="icon" @onclick="@(() => AddRenderComponent(typeof(TextCard), 20.0, 20.0))"></MatIcon>
+    <MatIcon Icon="link" Class="icon" ></MatIcon>
+    <MatIcon Icon="check_box" Class="icon" @onclick="@(() => AddRenderComponent(typeof(TodoCard), 20.0, 20.0))"></MatIcon>
+    <MatIcon Icon="code" Class="icon" @onclick="@(() => AddRenderComponent(typeof(VideoCard), 20.0, 20.0))"></MatIcon>
+    <MatIcon Icon="dashboard" Class="icon" @onclick="@(() => AddRenderComponent(typeof(ImageCard), 20.0, 20.0))"></MatIcon>
 </div>
 
 <div class="board dotgrid">
@@ -18,25 +18,27 @@
     private RenderFragment CustomRender { get; set; }
     private List<Type> componentList = new List<Type>();
 
-    private RenderFragment CreateComponent() => builder =>
+    private double mouseX, mouseY = 0;
+
+    private RenderFragment CreateComponent(double x, double y) => builder =>
     {
         foreach (Type t in componentList)
         {
             builder.OpenComponent(0, t);
-            builder.AddAttribute(1, "offsetTop", 20.0);
-            builder.AddAttribute(2, "offsetLeft", 20.0);
+            builder.AddAttribute(1, "offsetTop", y);
+            builder.AddAttribute(2, "offsetLeft", x);
             builder.CloseComponent();
         }
     };
 
-    private void AddRenderComponent(Type type)
+    private void AddRenderComponent(Type type, double x, double y)
     {
         componentList.Add(type);
-        RenderComponent();
+        RenderComponent(x, y);
     }
 
-    private void RenderComponent()
+    private void RenderComponent(double x, double y)
     {
-        CustomRender = CreateComponent();
+        CustomRender = CreateComponent(x, y);
     }
 }
