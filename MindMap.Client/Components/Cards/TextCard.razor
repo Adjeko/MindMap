@@ -1,0 +1,14 @@
+﻿<Movable offsetTop="@(offsetTop)" offsetLeft="@(offsetLeft)">
+    <div>
+        <MatTextField @bind-Value="@text" Label="Standard"></MatTextField>
+    </div>
+</Movable>
+
+@code {
+
+    [Parameter] public double offsetTop { get; set; }
+    [Parameter] public double offsetLeft { get; set; }
+
+    private String text;
+
+}

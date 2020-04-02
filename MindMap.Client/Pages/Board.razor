@@ -3,15 +3,12 @@
 <div class="sidebar">
     <MatIcon Icon="text_fields" Class="icon"></MatIcon>
     <MatIcon Icon="link" Class="icon"></MatIcon>
-    <MatIcon Icon="check_box" Class="icon" @onclick="RenderComponent"></MatIcon>
+    <MatIcon Icon="check_box" Class="icon" @onclick="@(() => RenderComponent(typeof(TextCard)))"></MatIcon>
     <MatIcon Icon="code" Class="icon"></MatIcon>
     <MatIcon Icon="dashboard" Class="icon"></MatIcon>
 </div>
 
 <div class="board dotgrid">
-    <Movable offsetTop="0" offsetLeft="0">
-    </Movable>
-
 
 </div>
 
@@ -21,20 +18,20 @@
     private int numberOfMovables = 0;
     private RenderFragment CustomRender { get; set; }
 
-    private RenderFragment CreateComponent() => builder =>
+    private RenderFragment CreateComponent(Type type) => builder =>
     {
         for (var i = 0; i < numberOfMovables; i++)
         {
-            builder.OpenComponent(0, typeof(Movable));
+            builder.OpenComponent(0, type);
             builder.AddAttribute(1, "offsetTop", 20.0);
             builder.AddAttribute(2, "offsetLeft", 20.0);
             builder.CloseComponent();
         }
     };
 
-    private void RenderComponent()
+    private void RenderComponent(Type type)
     {
         numberOfMovables++;
-        CustomRender = CreateComponent();
+        CustomRender = CreateComponent(type);
     }
 }

@@ -3,7 +3,7 @@ function movableDragMouseDown(element) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     element.onmousedown = e => {
         e = e || window.event;
-        e.preventDefault();
+        //e.preventDefault();
 
         pos3 = e.clientX;
         pos4 = e.clientY;
