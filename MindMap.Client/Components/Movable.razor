@@ -1,0 +1,28 @@
+﻿@inject IJSRuntime JsRuntime
+
+<div class="movable" @ref="movableElement" draggable="false" @onmousedown="dragMouseDown" style="top: @(offsetTop)px; left: @(offsetLeft)px;">
+    <h3>Movable</h3>
+
+</div>
+
+@code {
+
+    [Parameter] public double offsetTop { get; set; }
+    [Parameter] public double offsetLeft { get; set; }
+
+    ElementReference movableElement;
+
+    private double pos1, pos2, pos3, pos4 = 0;
+    private bool isMouseDown = false;
+    private bool isMouseOut = true;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        JsRuntime.InvokeVoidAsync("movableDragMouseDown", movableElement);
+    }
+
+    private void dragMouseDown(MouseEventArgs args)
+    {
+        JsRuntime.InvokeVoidAsync("movableDragMouseDown", movableElement);
+    }
+}

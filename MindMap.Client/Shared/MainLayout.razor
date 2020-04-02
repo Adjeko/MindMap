@@ -1,0 +1,22 @@
+﻿@inherits LayoutComponentBase
+
+<MatAppBarContainer Style="height: 100vh">
+    <MatAppBar Fixed="false" Style="color:var(--mdc-theme-on-primary);">
+        <MatAppBarRow>
+            <MatAppBarSection>
+                <MatIconButton Icon="menu"></MatIconButton>
+                <MatAppBarTitle>MindMap</MatAppBarTitle>
+            </MatAppBarSection>
+            <MatAppBarSection Align="@MatAppBarSectionAlign.End">
+                <MatIconButton Icon="settings"></MatIconButton>
+            </MatAppBarSection>
+        </MatAppBarRow>
+    </MatAppBar>
+
+    <MatAppBarContent>
+        <div class="main">
+            @Body
+        </div>
+    </MatAppBarContent>
+</MatAppBarContainer>
+
