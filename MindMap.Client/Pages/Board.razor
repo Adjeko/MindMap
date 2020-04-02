@@ -1,11 +1,11 @@
 ﻿@page "/board"
 
 <div class="sidebar">
-    <MatIcon Icon="text_fields" Class="icon"></MatIcon>
+    <MatIcon Icon="text_fields" Class="icon" @onclick="@(() => AddRenderComponent(typeof(TextCard)))"></MatIcon>
     <MatIcon Icon="link" Class="icon"></MatIcon>
-    <MatIcon Icon="check_box" Class="icon" @onclick="@(() => RenderComponent(typeof(TextCard)))"></MatIcon>
-    <MatIcon Icon="code" Class="icon"></MatIcon>
-    <MatIcon Icon="dashboard" Class="icon"></MatIcon>
+    <MatIcon Icon="check_box" Class="icon" @onclick="@(() => AddRenderComponent(typeof(TodoCard)))"></MatIcon>
+    <MatIcon Icon="code" Class="icon" @onclick="@(() => AddRenderComponent(typeof(VideoCard)))"></MatIcon>
+    <MatIcon Icon="dashboard" Class="icon" @onclick="@(() => AddRenderComponent(typeof(ImageCard)))"></MatIcon>
 </div>
 
 <div class="board dotgrid">
@@ -15,23 +15,28 @@
 @CustomRender
 
 @code {
-    private int numberOfMovables = 0;
     private RenderFragment CustomRender { get; set; }
+    private List<Type> componentList = new List<Type>();
 
-    private RenderFragment CreateComponent(Type type) => builder =>
+    private RenderFragment CreateComponent() => builder =>
     {
-        for (var i = 0; i < numberOfMovables; i++)
+        foreach (Type t in componentList)
         {
-            builder.OpenComponent(0, type);
+            builder.OpenComponent(0, t);
             builder.AddAttribute(1, "offsetTop", 20.0);
             builder.AddAttribute(2, "offsetLeft", 20.0);
             builder.CloseComponent();
         }
     };
 
-    private void RenderComponent(Type type)
+    private void AddRenderComponent(Type type)
     {
-        numberOfMovables++;
-        CustomRender = CreateComponent(type);
+        componentList.Add(type);
+        RenderComponent();
+    }
+
+    private void RenderComponent()
+    {
+        CustomRender = CreateComponent();
     }
 }

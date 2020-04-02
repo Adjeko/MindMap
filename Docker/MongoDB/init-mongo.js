@@ -1,4 +1,4 @@
-db.CreateUser(
+db.createUser(
     {
         user: "MindMap",
         pwd: "mindmap",

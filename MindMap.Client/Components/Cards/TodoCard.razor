@@ -1,0 +1,26 @@
+﻿
+
+
+@inherits Card
+
+<Movable offsetTop="@(offsetTop)" offsetLeft="@(offsetLeft)">
+    <div>
+        <MatList>
+            <MatListItem>
+                <MatCheckbox @bind-Value="@checked1" Label=" Item 1"></MatCheckbox>
+            </MatListItem>
+            <MatListItem>
+                <MatCheckbox @bind-Value="@checked2" Label=" Item 2"></MatCheckbox>
+            </MatListItem>
+            <MatListItem Disabled="true">
+                <MatCheckbox @bind-Value="@checked3" Label=" Item 3"></MatCheckbox>
+            </MatListItem>
+        </MatList>
+    </div>
+</Movable>
+
+@code {
+    private bool checked1;
+    private bool checked2;
+    private bool checked3;
+}
